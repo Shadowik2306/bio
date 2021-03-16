@@ -1,9 +1,10 @@
 import sys
 import sqlite3
 from PyQt5 import QtWidgets, QtGui, QtCore, uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt
 from random import shuffle
+from data.uic_code import *
 
 
 def except_hook(cls, exception, traceback):
@@ -22,13 +23,18 @@ class WelcomWind(QMainWindow):
         self.close()
 
 
-class TectWind(QMainWindow):
+class TectWind(QMainWindow, Ui_Test_Wind):
     def __init__(self, test=None):
         super(TectWind, self).__init__()
-        uic.loadUi('data/Qt/TestWind.ui', self)
+        self.setupUi(self)
         self.test = test
         self.real_test = self.load_test(self.test)
         self.answer1.clicked.connect(self.check)
+        self.answer2.clicked.connect(self.check)
+        self.answer3.clicked.connect(self.check)
+        self.answer4.clicked.connect(self.check)
+        self.pushButton.clicked.connect(self.exit_to_main)
+        self.give_up.clicked.connect(self.pas)
         self.process()
 
     def load_test(self, test):
@@ -42,7 +48,8 @@ class TectWind(QMainWindow):
         if not self.real_test:
             self.real_test = self.load_test(self.test)
         self.now = self.real_test.pop(0)
-        self.question = eval('"' + str(self.now[2] + '"'))
+        print(str(self.now))
+        self.question = str(self.now[2])
         self.label.setText(self.question)
         self.answers = self.now[3:7]
         print(self.answers)
@@ -50,6 +57,7 @@ class TectWind(QMainWindow):
         self.answer2.setText(self.answers[1])
         self.answer3.setText(self.answers[2])
         self.answer4.setText(self.answers[3])
+        text = ''
         if self.now[7] == 1:
             text = self.answers[0]
         elif self.now[7] == 2:
@@ -59,10 +67,51 @@ class TectWind(QMainWindow):
         elif self.now[7] == 4:
             text = self.answers[3]
         self.right_answer = (self.now[7], text)
-        print(self.right_answer)
+        self.answer = eval('"' + str(self.now[8]) + '"'.replace(',', ',\n'))
 
-    def check(self):
-        pass
+    def pas(self):
+        self.check(g=True)
+
+    def check(self, g=False):
+        k = None
+        if g:
+            k = False
+        elif self.sender().objectName() == 'answer1' and self.right_answer[0] == 1:
+            k = True
+        elif self.sender().objectName() == 'answer2' and self.right_answer[0] == 2:
+            k = True
+        elif self.sender().objectName() == 'answer3' and self.right_answer[0] == 3:
+            k = True
+        elif self.sender().objectName() == 'answer4' and self.right_answer[0] == 4:
+            k = True
+        else:
+            k = False
+        self.wind = Right_answer(self.answer, self.right_answer, k)
+        self.wind.show()
+        k = self.wind.exec_()
+        if k:
+            self.process()
+        else:
+            self.exit_to_main()
+
+    def exit_to_main(self):
+        self.wind = WelcomWind()
+        self.wind.show()
+        self.close()
+
+
+
+class Right_answer(QDialog, Ui_Result):
+    def __init__(self, answer, right_answer, right):
+        super(Right_answer, self).__init__()
+        self.setupUi(self)
+        self.answerText.setText(answer)
+        if right:
+            self.answer.setStyleSheet("color: green")
+        else:
+            self.answer.setStyleSheet("color: red")
+        self.answer.setText(f'{right_answer[0]}: {right_answer[1]}')
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

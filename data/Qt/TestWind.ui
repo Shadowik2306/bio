@@ -99,12 +99,13 @@
            </font>
           </property>
           <property name="text">
-           <string>Какой метод позволяет избирательно
- выделять и изучать
- органоиды клетки?</string>
+           <string>Какой метод позволяет избирательновыделять и изучать органоиды клетки?</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
