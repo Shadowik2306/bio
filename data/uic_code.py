@@ -502,3 +502,69 @@ class Ui_Select_Group(object):
         self.pushButton_6.setText(_translate("MainWindow", "4"))
         self.pushButton_7.setText(_translate("MainWindow", "5"))
 
+
+class Ui_Welcome(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(829, 599)
+        MainWindow.setStyleSheet("")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setContentsMargins(20, 15, 20, 15)
+        self.gridLayout.setObjectName("gridLayout")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Monotype Corsiva")
+        font.setPointSize(30)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.randomQuest = QtWidgets.QPushButton(self.centralwidget)
+        self.randomQuest.setMinimumSize(QtCore.QSize(0, 70))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI Light")
+        font.setPointSize(12)
+        self.randomQuest.setFont(font)
+        self.randomQuest.setObjectName("randomQuest")
+        self.horizontalLayout.addWidget(self.randomQuest)
+        self.choseTest = QtWidgets.QPushButton(self.centralwidget)
+        self.choseTest.setMinimumSize(QtCore.QSize(0, 70))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI Light")
+        font.setPointSize(12)
+        self.choseTest.setFont(font)
+        self.choseTest.setObjectName("choseTest")
+        self.horizontalLayout.addWidget(self.choseTest)
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 829, 20))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Интерактивная \n"
+"обучающая\n"
+" программа\n"
+"по подготовке к ЕГЭ \n"
+"по биологии"))
+        self.randomQuest.setText(_translate("MainWindow", "Случайные\n"
+"вопросы "))
+        self.choseTest.setText(_translate("MainWindow", "Выбрать\n"
+" тест"))
+

@@ -11,10 +11,10 @@ def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
 
 
-class WelcomWind(QMainWindow):
+class WelcomWind(QMainWindow, Ui_Welcome):
     def __init__(self):
         super(WelcomWind, self).__init__()
-        uic.loadUi('data/Qt/WelcomeWind.ui', self)
+        self.setupUi(self)
         self.randomQuest.clicked.connect(self.random_quests)
         self.choseTest.clicked.connect(self.chose)
 
@@ -57,11 +57,9 @@ class TectWind(QMainWindow, Ui_Test_Wind):
         if not self.real_test:
             self.real_test = self.load_test(self.test)
         self.now = self.real_test.pop(0)
-        print(str(self.now))
         self.question = str(self.now[2]).capitalize()
         self.label.setText(self.question)
         self.answers = self.now[3:7]
-        print(self.answers)
         self.answer1.setText(self.answers[0].capitalize())
         self.answer2.setText(self.answers[1].capitalize())
         self.answer3.setText(self.answers[2].capitalize())
